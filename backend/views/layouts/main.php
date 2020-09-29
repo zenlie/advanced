@@ -37,6 +37,8 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Kategori Buku', 'url' => ['/daf-kategori-buku/index']],
+        ['label' => 'Buku', 'url' => ['/daf-buku/index']], //coba salahain /daf_buku/index
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
