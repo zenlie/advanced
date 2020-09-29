@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kategori_id')->textInput() ?>
+    <?= $form->field($model, 'kategori_id')->dropDownList($dafKategori) ?>
 
     <?= $form->field($model, 'judul')->textInput(['maxlength' => true]) ?>
 

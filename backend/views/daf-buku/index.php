@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'tahun_terbit',
 
             ['class' => 'yii\grid\ActionColumn'],
-        ],
+        ], //gridview
     ]); ?>
 
 

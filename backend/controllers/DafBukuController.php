@@ -8,7 +8,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use backend\models\DafKategoriBuku;
+use yii\helpers\ArrayHelper;
 /**
  * DafBukuController implements the CRUD actions for DafBuku model.
  */
@@ -65,6 +66,8 @@ class DafBukuController extends Controller
     public function actionCreate()
     {
         $model = new DafBuku();
+        $dafKategori = DafKategoriBuku::find()->all();
+        $dafKategori = ArrayHelper::map($dafKategori,'id','nama');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->buku_id]);
@@ -72,6 +75,7 @@ class DafBukuController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'dafKategori' => $dafKategori
         ]);
     }
 
