@@ -40,6 +40,8 @@ AppAsset::register($this);
         ['label' => 'Kategori Buku', 'url' => ['/daf-kategori-buku/index']],
         ['label' => 'Buku', 'url' => ['/daf-buku/index']], //coba salahain /daf_buku/index
         ['label' => 'Harga Buku', 'url' => ['/harga-buku/index']],
+        ['label' => 'Rak Buku', 'url' => ['/rak-buku/index']],
+        ['label' => 'Posisi Buku', 'url' => ['/posisi-buku/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
