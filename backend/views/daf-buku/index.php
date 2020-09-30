@@ -20,15 +20,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => true,
+        'filterModel' => true, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 3
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'attribute' => 'kategori_id',
-                'value' => 'kategori.nama',
-                'filter' => Html::textInput('kategori_id',Yii::$app->request->get(
-                    'kategori_id'),['class'=>'form-control'])
+                'attribute' => 'kategori_id', //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 2
+                'value' => 'kategori.nama', //nama relasi.nama kolom getKategori.kolomtblnama
+                'filter' => Html::textInput('kategori_id',Yii::$app->request->get('kategori_id'),['class'=>'form-control']) //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 1
+                    
             ],
             'judul',
             'pengarang',

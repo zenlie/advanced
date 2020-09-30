@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'buku_id',
-            'kategori.nama',
+            'kategori.nama', //dropdown list 8
             'judul',
             'pengarang',
             'tahun_terbit',

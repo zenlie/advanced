@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'dafKategori' => $dafKategori //dropdown list 12
     ]) ?>
 
 </div>
