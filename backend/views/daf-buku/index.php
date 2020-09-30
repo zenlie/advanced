@@ -20,11 +20,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'buku_id',
-            'kategori_id',
+            [
+                'attribute' => 'kategori_id',
+                'value' => 'kategori.nama',
+                'filter' => Html::textInput('kategori_id',Yii::$app->request->get(
+                    'kategori_id'),['class'=>'form-control'])
+            ],
             'judul',
             'pengarang',
             'tahun_terbit',

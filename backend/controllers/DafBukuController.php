@@ -36,12 +36,24 @@ class DafBukuController extends Controller
      */
     public function actionIndex()
     {
+        $dafKategori = DafKategoriBuku::find()->all();
+        $dafKategori = ArrayHelper::map($dafKategori,'id','nama');
+
+        $search = Yii::$app->request->queryParams;
+
+        $query = DafBuku::find()->joinWith('kategori');
+
+        if(!empty($search['kategori_id'])){
+            $query->andFilterWhere(['Like','daf_kategori_buku.nama',$search['kategori_id']]);
+        }
+
         $dataProvider = new ActiveDataProvider([
-            'query' => DafBuku::find(),
+            'query' => $query,
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'dafKategori' => $dafKategori
         ]);
     }
 
@@ -71,12 +83,12 @@ class DafBukuController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->buku_id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'dafKategori' => $dafKategori
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-            'dafKategori' => $dafKategori
-        ]);
     }
 
     /**
