@@ -13,7 +13,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-
+    public $nama_lengkap; //Cara Kustomisasi Form Signup di Frontend 1
 
     /**
      * {@inheritdoc}
@@ -26,6 +26,11 @@ class SignupForm extends Model
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
+            ['nama_lengkap', 'trim'], //Cara Kustomisasi Form Signup di Frontend 2
+            ['nama_lengkap', 'required'], //Cara Kustomisasi Form Signup di Frontend 2
+            ['nama_lengkap', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'], //Cara Kustomisasi Form Signup di Frontend 2
+            ['nama_lengkap', 'string', 'min' => 2, 'max' => 255], //Cara Kustomisasi Form Signup di Frontend 2
+
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
@@ -34,6 +39,12 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            
+            // contoh digabung dengan array
+            // [['username','email','nama_lengkap'], 'trim'],
+            // [['username','email','password','nama_lengkap'], 'required'],
+            // ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            // ['username', 'string', 'min' => 2, 'max' => 255],
         ];
     }
 
@@ -50,6 +61,7 @@ class SignupForm extends Model
         
         $user = new User();
         $user->username = $this->username;
+        $user->nama_lengkap = $this->nama_lengkap; //Cara Kustomisasi Form Signup di Frontend 3
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
