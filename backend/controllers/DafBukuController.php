@@ -51,6 +51,14 @@ class DafBukuController extends Controller
             $query->andFilterWhere(['Like','judul',$search['judul']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
         }
 
+        if(!empty($search['pengarang'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
+            $query->andFilterWhere(['Like','pengarang',$search['pengarang']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+        }
+
+        if(!empty($search['tahun_terbit'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
+            $query->andFilterWhere(['Like','tahun_terbit',$search['tahun_terbit']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+        }
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
         ]);

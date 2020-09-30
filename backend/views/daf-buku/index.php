@@ -34,8 +34,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'judul', //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 1
                 'filter' => Html::textInput('judul',Yii::$app->request->get('judul'),['class'=>'form-control']), //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 2                    
             ],
-            'pengarang',
-            'tahun_terbit',
+            [
+                'attribute' => 'pengarang', //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 1
+                'filter' => Html::textInput('pengarang',Yii::$app->request->get('pengarang'),['class'=>'form-control']), //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 2                    
+            ],
+            [
+                'attribute' => 'tahun_terbit', //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 1
+                'filter' => Html::textInput('tahun_terbit',Yii::$app->request->get('tahun_terbit'),['class'=>'form-control']), //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 2                    
+            ],
+            // 'pengarang',        <= ini jika tanpa filter
+            // 'tahun_terbit',
 
             ['class' => 'yii\grid\ActionColumn'],
         ], //gridview
