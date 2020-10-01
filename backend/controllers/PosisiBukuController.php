@@ -101,7 +101,7 @@ class PosisiBukuController extends Controller
         $dafBuku = DafBuku::find()->all(); //dropdown list 2
         $rakBuku = RakBuku::find()->all(); //dropdown list 2
         $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
-        $rakBuku = ArrayHelper::map($rakBuku,'rak_id','no_rak'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        $rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->buku_id]);
