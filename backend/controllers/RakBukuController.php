@@ -35,13 +35,29 @@ class RakBukuController extends Controller
      */
     public function actionIndex()
     {
+        $search = Yii::$app->request->queryParams; //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+
+        $query = RakBuku::find('id'); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        
+        if(!empty($search['id'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
+            $query->andFilterWhere(['Like','no_rak',$search['id']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+        }
+
         $dataProvider = new ActiveDataProvider([
-            'query' => RakBuku::find(),
+            'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => RakBuku::find(),
+        // ]);
+
+        // return $this->render('index', [
+        //     'dataProvider' => $dataProvider,
+        // ]);
     }
 
     /**

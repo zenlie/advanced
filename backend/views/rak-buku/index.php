@@ -20,11 +20,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => true, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 3
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'no_rak',
+            [
+                'attribute' => 'id', //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 2
+                'value' => 'no_rak', //nama relasi.nama kolom getKategori.kolomtblnama
+                'filter' => Html::textInput('id',Yii::$app->request->get('id'),['class'=>'form-control']) //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 1
+                    
+            ],
+
+            // 'id',
+            // 'no_rak',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
