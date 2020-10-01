@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'dafBuku' => $dafBuku //dropdown list 6
     ]) ?>
 
 </div>

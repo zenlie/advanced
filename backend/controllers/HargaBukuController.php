@@ -8,6 +8,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\DafBuku; //dropdown list 1
+use yii\helpers\ArrayHelper; //dropdown list 3
 
 /**
  * HargaBukuController implements the CRUD actions for HargaBuku model.
@@ -35,12 +37,28 @@ class HargaBukuController extends Controller
      */
     public function actionIndex()
     {
+        $dafBuku = DafBuku::find()->all();
+        $dafBuku = ArrayHelper::map($dafBuku,'id','judul');
+
+        $search = Yii::$app->request->queryParams; //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        
+        $query = HargaBuku::find()->joinWith('buku'); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        
+        if(!empty($search['buku_id'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
+            $query->andFilterWhere(['Like','daf_buku.judul',$search['buku_id']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+        }
+
+        if(!empty($search['harga'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
+            $query->andFilterWhere(['Like','harga',$search['harga']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+        }
+
         $dataProvider = new ActiveDataProvider([
-            'query' => HargaBuku::find(),
+            'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'dafBuku' => $dafBuku
         ]);
     }
 
@@ -65,14 +83,17 @@ class HargaBukuController extends Controller
     public function actionCreate()
     {
         $model = new HargaBuku();
-
+        $dafBuku = DafBuku::find()->all(); //dropdown list 2
+        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'dafBuku' => $dafBuku //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
