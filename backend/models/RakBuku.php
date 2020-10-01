@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "rak_buku".
  *
  * @property int $id
- * @property int $no_rak
+ * @property string $no_rak
  *
  * @property PosisiBuku[] $posisiBukus
  */
@@ -29,7 +29,7 @@ class RakBuku extends \yii\db\ActiveRecord
     {
         return [
             [['no_rak'], 'required'],
-            [['no_rak'], 'integer'],
+            [['no_rak'], 'string', 'max' => 50],
         ];
     }
 
