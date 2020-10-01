@@ -38,25 +38,8 @@ class PosisiBukuController extends Controller
      */
     public function actionIndex()
     {
-        $dafBuku = DafBuku::find()->all();
-        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul');
 
-        $rakBuku = RakBuku::find()->all();
-        $rakBuku = ArrayHelper::map($rakBuku,'rak_id','no_rak');
-        
-        $search = Yii::$app->request->queryParams; //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
-
-        $query = DafBuku::find()->joinWith('buku'); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
-        $query = RakBuku::find()->joinWith('posisiBukus'); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
-
-        if(!empty($search['buku_id'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
-            $query->andFilterWhere(['Like','daf_buku.judul',$search['buku_id']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
-        }
-        
-        if(!empty($search['rak_id'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
-            $query->andFilterWhere(['Like','rak_buku.no_rak',$search['rak_id']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
-        }
-
+        $query = PosisiBuku::find(); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
@@ -64,17 +47,8 @@ class PosisiBukuController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'dafBuku' => $dafBuku,
-            'rakBuku' => $rakBuku
+
         ]);
-
-        // $dataProvider = new ActiveDataProvider([
-        //     'query' => PosisiBuku::find(),
-        // ]);
-
-        // return $this->render('index', [
-        //     'dataProvider' => $dataProvider,
-        // ]);
     }
 
     /**
@@ -104,8 +78,7 @@ class PosisiBukuController extends Controller
         $rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->buku_id]);
-            return $this->redirect(['view', 'id' => $model->rak_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -113,16 +86,6 @@ class PosisiBukuController extends Controller
                 'rakBuku' => $rakBuku //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
             ]);
         }
-
-        // $model = new PosisiBuku();
-
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // }
-
-        // return $this->render('create', [
-        //     'model' => $model,
-        // ]);
     }
 
     /**

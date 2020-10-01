@@ -66,6 +66,6 @@ class PosisiBuku extends \yii\db\ActiveRecord
      */
     public function getBuku()
     {
-        return $this->hasOne(DafBuku::className(), ['id' => 'buku_id']);
+        return $this->hasOne(DafBuku::className(), ['buku_id' => 'buku_id']);
     }
 }
