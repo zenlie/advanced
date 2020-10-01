@@ -30,8 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'rak_id',
-            'buku_id',
+            'buku.judul',
+            'rak.no_rak',
+            // 'rak_id',
+            // 'buku_id',
         ],
     ]) ?>
 

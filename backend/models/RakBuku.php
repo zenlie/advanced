@@ -51,6 +51,6 @@ class RakBuku extends \yii\db\ActiveRecord
      */
     public function getPosisiBukus()
     {
-        return $this->hasMany(PosisiBuku::className(), ['rak_id' => 'id']);
+        return $this->hasMany(PosisiBuku::className(), ['rak_id' => 'id'],['buku_id' => 'id']);
     }
 }
