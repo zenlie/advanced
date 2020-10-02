@@ -39,10 +39,12 @@ class PosisiBukuController extends Controller
     public function actionIndex()
     {
 
-        $query = PosisiBuku::find(); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        $query = PosisiBuku::find(); 
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            'query' => $query, 
         ]);
 
         return $this->render('index', [
@@ -72,18 +74,24 @@ class PosisiBukuController extends Controller
     public function actionCreate()
     {
         $model = new PosisiBuku();
-        $dafBuku = DafBuku::find()->all(); //dropdown list 2
-        $rakBuku = RakBuku::find()->all(); //dropdown list 2
-        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
-        $rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        //dropdown list 2
+        $dafBuku = DafBuku::find()->all(); 
+        //dropdown list 2
+        $rakBuku = RakBuku::find()->all(); 
+        //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul');
+        //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value 
+        $rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'dafBuku' => $dafBuku, //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
-                'rakBuku' => $rakBuku //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
+                //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
+                'dafBuku' => $dafBuku,
+                //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist 
+                'rakBuku' => $rakBuku 
             ]);
         }
     }

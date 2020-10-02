@@ -35,16 +35,21 @@ class DafKategoriBukuController extends Controller
      */
     public function actionIndex()
     {
-        $search = Yii::$app->request->queryParams; //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        $search = Yii::$app->request->queryParams; 
 
-        $query = DafKategoriBuku::find('id'); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
-        
-        if(!empty($search['id'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
-            $query->andFilterWhere(['Like','nama',$search['id']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        $query = DafKategoriBuku::find('id'); 
+
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
+        if(!empty($search['id'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+            $query->andFilterWhere(['Like','nama',$search['id']]); 
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            'query' => $query, 
         ]);
 
         return $this->render('index', [

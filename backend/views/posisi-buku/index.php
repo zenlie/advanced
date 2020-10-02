@@ -20,20 +20,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => true, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 3
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 3
+        'filterModel' => true, 
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'attribute' => 'rak_id', //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 2
-                'value' => 'rak.no_rak', //nama relasi.nama kolom getKategori.kolomtblnama
-                'filter' => Html::textInput('rak_id',Yii::$app->request->get('rak_id'),['class'=>'form-control']) //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 1
+                //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 2
+                'attribute' => 'rak_id', 
+                //nama relasi.nama kolom getKategori.kolomtblnama
+                'value' => 'rak.no_rak', 
+                //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 1
+                'filter' => Html::textInput('rak_id',Yii::$app->request->get('rak_id'),['class'=>'form-control']) 
                     
             ],
             [
-                'attribute' => 'buku_id', //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 2
-                'value' => 'buku.judul', //nama relasi.nama kolom getKategori.kolomtblnama
-                'filter' => Html::textInput('buku_id',Yii::$app->request->get('buku_id'),['class'=>'form-control']) //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 1
+                //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 2
+                'attribute' => 'buku_id',
+                //nama relasi.nama kolom getKategori.kolomtblnama 
+                'value' => 'buku.judul', 
+                //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 1
+                'filter' => Html::textInput('buku_id',Yii::$app->request->get('buku_id'),['class'=>'form-control']) 
                     
             ],
         

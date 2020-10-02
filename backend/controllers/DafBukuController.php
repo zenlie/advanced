@@ -8,8 +8,12 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\DafKategoriBuku; //dropdown list 1
-use yii\helpers\ArrayHelper; //dropdown list 3
+
+//dropdown list 1
+use backend\models\DafKategoriBuku;
+
+//dropdown list 3 
+use yii\helpers\ArrayHelper; 
 /**
  * DafBukuController implements the CRUD actions for DafBuku model.
  */
@@ -33,34 +37,45 @@ class DafBukuController extends Controller
     /**
      * Lists all DafBuku models.
      * @return mixed
-     */
+      */
     public function actionIndex()
     {
         $dafKategori = DafKategoriBuku::find()->all();
         $dafKategori = ArrayHelper::map($dafKategori,'id','nama');
 
-        $search = Yii::$app->request->queryParams; //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        $search = Yii::$app->request->queryParams; 
 
-        $query = DafBuku::find()->joinWith('kategori'); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        $query = DafBuku::find()->joinWith('kategori'); 
 
-        if(!empty($search['kategori_id'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
-            $query->andFilterWhere(['Like','daf_kategori_buku.nama',$search['kategori_id']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
+        if(!empty($search['kategori_id'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+            $query->andFilterWhere(['Like','daf_kategori_buku.nama',$search['kategori_id']]);
         }
 
-        if(!empty($search['judul'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
-            $query->andFilterWhere(['Like','judul',$search['judul']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
+        if(!empty($search['judul'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+            $query->andFilterWhere(['Like','judul',$search['judul']]); 
         }
 
-        if(!empty($search['pengarang'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
-            $query->andFilterWhere(['Like','pengarang',$search['pengarang']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
+        if(!empty($search['pengarang'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+            $query->andFilterWhere(['Like','pengarang',$search['pengarang']]); 
         }
 
-        if(!empty($search['tahun_terbit'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
-            $query->andFilterWhere(['Like','tahun_terbit',$search['tahun_terbit']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
+        if(!empty($search['tahun_terbit'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+            $query->andFilterWhere(['Like','tahun_terbit',$search['tahun_terbit']]); 
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            'query' => $query, 
         ]);
 
         return $this->render('index', [
@@ -90,15 +105,21 @@ class DafBukuController extends Controller
     public function actionCreate()
     {
         $model = new DafBuku();
-        $dafKategori = DafKategoriBuku::find()->all(); //dropdown list 2
-        $dafKategori = ArrayHelper::map($dafKategori,'id','nama'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+
+        //dropdown list 2
+        $dafKategori = DafKategoriBuku::find()->all(); 
+
+        //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        $dafKategori = ArrayHelper::map($dafKategori,'id','nama'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->buku_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'dafKategori' => $dafKategori //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
+
+                //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
+                'dafKategori' => $dafKategori 
             ]);
         }
     }
@@ -113,8 +134,10 @@ class DafBukuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $dafKategori = DafKategoriBuku::find()->all(); //dropdown list 9
-        $dafKategori = ArrayHelper::map($dafKategori,'id','nama'); //dropdown list 10  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        //dropdown list 9
+        $dafKategori = DafKategoriBuku::find()->all(); 
+        //dropdown list 10  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        $dafKategori = ArrayHelper::map($dafKategori,'id','nama'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->buku_id]);
@@ -122,7 +145,9 @@ class DafBukuController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'dafKategori' => $dafKategori //dropdown list 11 kirim array dari katbuku ke form yg dropdownlist
+
+            //dropdown list 11 kirim array dari katbuku ke form yg dropdownlist
+            'dafKategori' => $dafKategori 
         ]);
     }
 

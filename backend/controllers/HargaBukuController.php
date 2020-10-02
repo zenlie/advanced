@@ -8,8 +8,12 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\DafBuku; //dropdown list 1
-use yii\helpers\ArrayHelper; //dropdown list 3
+
+//dropdown list 1
+use backend\models\DafBuku; 
+
+//dropdown list 3
+use yii\helpers\ArrayHelper; 
 
 /**
  * HargaBukuController implements the CRUD actions for HargaBuku model.
@@ -40,20 +44,27 @@ class HargaBukuController extends Controller
         $dafBuku = DafBuku::find()->all();
         $dafBuku = ArrayHelper::map($dafBuku,'id','judul');
 
-        $search = Yii::$app->request->queryParams; //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        $search = Yii::$app->request->queryParams; 
         
-        $query = HargaBuku::find()->joinWith('buku'); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        $query = HargaBuku::find()->joinWith('buku'); 
         
-        if(!empty($search['buku_id'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
-            $query->andFilterWhere(['Like','daf_buku.judul',$search['buku_id']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
+        if(!empty($search['buku_id'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+            $query->andFilterWhere(['Like','daf_buku.judul',$search['buku_id']]); 
         }
 
-        if(!empty($search['harga'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
-            $query->andFilterWhere(['Like','harga',$search['harga']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
+        if(!empty($search['harga'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
+            $query->andFilterWhere(['Like','harga',$search['harga']]); 
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            'query' => $query, 
         ]);
 
         return $this->render('index', [
@@ -83,15 +94,18 @@ class HargaBukuController extends Controller
     public function actionCreate()
     {
         $model = new HargaBuku();
-        $dafBuku = DafBuku::find()->all(); //dropdown list 2
-        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul'); //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        //dropdown list 2
+        $dafBuku = DafBuku::find()->all(); 
+        //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul'); 
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'dafBuku' => $dafBuku //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
+                //dropdown list 5 kirim array dari katbuku ke form yg dropdownlist
+                'dafBuku' => $dafBuku 
             ]);
         }
     }

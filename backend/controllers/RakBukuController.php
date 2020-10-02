@@ -35,29 +35,27 @@ class RakBukuController extends Controller
      */
     public function actionIndex()
     {
-        $search = Yii::$app->request->queryParams; //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        $search = Yii::$app->request->queryParams; 
 
-        $query = RakBuku::find('id'); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+        $query = RakBuku::find('id'); 
         
-        if(!empty($search['id'])){ //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
-            $query->andFilterWhere(['Like','no_rak',$search['id']]); //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
+        if(!empty($search['id'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+            $query->andFilterWhere(['Like','no_rak',$search['id']]); 
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query, //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
+            'query' => $query, 
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
 
-        // $dataProvider = new ActiveDataProvider([
-        //     'query' => RakBuku::find(),
-        // ]);
-
-        // return $this->render('index', [
-        //     'dataProvider' => $dataProvider,
-        // ]);
     }
 
     /**
