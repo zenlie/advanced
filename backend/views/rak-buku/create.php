@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\RakBuku */
 
 $this->title = 'Create Rak Buku';
-$this->params['breadcrumbs'][] = ['label' => 'Rak Bukus', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Rak Buku', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rak-buku-create">

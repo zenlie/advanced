@@ -12,9 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     
-    <?= $form->field($model, 'rak_id')->dropDownList($rakBuku,['prompt'=>'-pilih rak-'])->label('no rak') ?> // dropdown list 7
+    // dropdown list 7
+    <?= $form->field($model, 'rak_id')->dropDownList($rakBuku,['prompt'=>'-pilih rak-'])->label('no rak') ?> 
 
-    <?= $form->field($model, 'buku_id')->dropDownList($dafBuku,['prompt'=>'-pilih buku-'])->label('nama buku') ?> // dropdown list 7
+    // dropdown list 7
+    <?= $form->field($model, 'buku_id')->dropDownList($dafBuku,['prompt'=>'-pilih buku-'])->label('nama buku') ?> 
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

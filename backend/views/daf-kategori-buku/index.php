@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Daf Kategori Bukus';
+$this->title = 'Kategori Buku';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="daf-kategori-buku-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Daf Kategori Buku', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Kategori Buku', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\PosisiBuku */
 
 $this->title = 'Create Posisi Buku';
-$this->params['breadcrumbs'][] = ['label' => 'Posisi Bukus', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Posisi Buku', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="posisi-buku-create">

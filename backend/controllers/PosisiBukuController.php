@@ -105,15 +105,38 @@ class PosisiBukuController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
+        //dropdown list 9
+        $dafBuku = DafBuku::find()->all(); 
+        //dropdown list 9
+        $rakBuku = RakBuku::find()->all(); 
+        //dropdown list 10  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul'); 
+        //dropdown list 10  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
+        $rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->posisi_buku_id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+
+            //dropdown list 11 kirim array dari katbuku ke form yg dropdownlist
+            'dafBuku' => $dafBuku, 
+            'rakBuku' => $rakBuku 
         ]);
+
+        // $model = $this->findModel($id);
+
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // }
+
+        // return $this->render('update', [
+        //     'model' => $model,
+        // ]);
     }
 
     /**

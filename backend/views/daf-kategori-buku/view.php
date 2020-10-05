@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\DafKategoriBuku */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Daf Kategori Bukus', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Kategori Buku', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

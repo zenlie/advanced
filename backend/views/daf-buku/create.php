@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\DafBuku */
 
-$this->title = 'Create Daf Buku';
-$this->params['breadcrumbs'][] = ['label' => 'Daf Bukus', 'url' => ['index']];
+$this->title = 'Create Buku';
+$this->params['breadcrumbs'][] = ['label' => 'Buku', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="daf-buku-create">
