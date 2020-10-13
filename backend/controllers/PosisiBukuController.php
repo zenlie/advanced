@@ -38,9 +38,32 @@ class PosisiBukuController extends Controller
      */
     public function actionIndex()
     {
+        $rakBuku = RakBuku::find()->all(); 
+        $rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); 
 
+        $dafBuku = DafBuku::find()->all(); 
+        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul');
+
+        $search = Yii::$app->request->queryParams;
         //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
-        $query = PosisiBuku::find(); 
+        $query = PosisiBuku::find() 
+                ->joinWith('rak')
+                ->joinWith('buku');  
+
+        if(!empty($search['rak_id'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+            $query->andFilterWhere(['Like','rak_id',$search['rak_id']]);
+        }
+
+        if(!empty($search['buku_id'])){ 
+            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+            $query->andFilterWhere(['Like','buku_id',$search['buku_id']]);
+        }
+
+        // if(!empty($search['buku_id'])){ 
+        //     //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
+        //     $query->andFilterWhere(['Like','daf_kategori_buku.nama',$search['buku_id']]);
+        // }
 
         $dataProvider = new ActiveDataProvider([
             //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
@@ -49,6 +72,8 @@ class PosisiBukuController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'rakBuku' => $rakBuku,
+            'dafBuku' => $dafBuku,
 
         ]);
     }

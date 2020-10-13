@@ -31,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 //nama relasi.nama kolom getKategori.kolomtblnama
                 'value' => 'rak.no_rak', 
                 //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 1
-                'filter' => Html::textInput('rak_id',Yii::$app->request->get('rak_id'),['class'=>'form-control']) 
+                'filter' => Html::dropDownList('rak_id',Yii::$app->request->get('
+                    rak_id'),$rakBuku,['class'=>'form-control','prompt'=>'- pilih no rak -']) 
                     
             ],
             [
