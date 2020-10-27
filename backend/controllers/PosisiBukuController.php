@@ -3,23 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\PosisiBuku;
+// use backend\models\PosisiBuku;
+use backend\models\search\PosisiBukuSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\DafBuku;
-use backend\models\RakBuku;
-use yii\helpers\ArrayHelper;
 
-/**
- * PosisiBukuController implements the CRUD actions for PosisiBuku model.
- */
 class PosisiBukuController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+
     public function behaviors()
     {
         return [
@@ -32,49 +25,14 @@ class PosisiBukuController extends Controller
         ];
     }
 
-    /**
-     * Lists all PosisiBuku models.
-     * @return mixed
-     */
     public function actionIndex()
     {
-        $rakBuku = RakBuku::find()->all(); 
-        $rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); 
-
-        $dafBuku = DafBuku::find()->all(); 
-        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul');
-
-        $search = Yii::$app->request->queryParams;
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
-        $query = PosisiBuku::find() 
-                ->joinWith('rak')
-                ->joinWith('buku');  
-
-        if(!empty($search['rak_id'])){ 
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
-            $query->andFilterWhere(['Like','rak_id',$search['rak_id']]);
-        }
-
-        if(!empty($search['buku_id'])){ 
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
-            $query->andFilterWhere(['Like','buku_id',$search['buku_id']]);
-        }
-
-        // if(!empty($search['buku_id'])){ 
-        //     //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
-        //     $query->andFilterWhere(['Like','daf_kategori_buku.nama',$search['buku_id']]);
-        // }
-
-        $dataProvider = new ActiveDataProvider([
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
-            'query' => $query, 
-        ]);
+        $searchModel = new PosisiBukuSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'rakBuku' => $rakBuku,
-            'dafBuku' => $dafBuku,
-
+            'searchModel' => $searchModel
         ]);
     }
 

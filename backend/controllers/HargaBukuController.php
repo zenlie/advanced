@@ -9,20 +9,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-//dropdown list 1
 use backend\models\DafBuku; 
-
-//dropdown list 3
 use yii\helpers\ArrayHelper; 
 
-/**
- * HargaBukuController implements the CRUD actions for HargaBuku model.
- */
 class HargaBukuController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -34,36 +25,25 @@ class HargaBukuController extends Controller
             ],
         ];
     }
-
-    /**
-     * Lists all HargaBuku models.
-     * @return mixed
-     */
+    
     public function actionIndex()
     {
         $dafBuku = DafBuku::find()->all();
         $dafBuku = ArrayHelper::map($dafBuku,'id','judul');
 
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
         $search = Yii::$app->request->queryParams; 
-        
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
+
         $query = HargaBuku::find()->joinWith('buku'); 
-        
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
+
         if(!empty($search['buku_id'])){ 
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
             $query->andFilterWhere(['Like','daf_buku.judul',$search['buku_id']]); 
         }
 
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
         if(!empty($search['harga'])){ 
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
             $query->andFilterWhere(['Like','harga',$search['harga']]); 
         }
 
         $dataProvider = new ActiveDataProvider([
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
             'query' => $query, 
         ]);
 
@@ -73,12 +53,6 @@ class HargaBukuController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single HargaBuku model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -86,15 +60,9 @@ class HargaBukuController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new HargaBuku model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
         $model = new HargaBuku();
-        //dropdown list 2
         $dafBuku = DafBuku::find()->all(); 
         //dropdown list 4  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
         $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul'); 

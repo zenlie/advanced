@@ -35,13 +35,10 @@ class DafKategoriBukuController extends Controller
      */
     public function actionIndex()
     {
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
+        
         $search = Yii::$app->request->queryParams; 
-
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
         $query = DafKategoriBuku::find('id'); 
 
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
         if(!empty($search['id'])){ 
             //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
             $query->andFilterWhere(['Like','nama',$search['id']]); 

@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use backend\models\search\DafBukuSearch;
 use backend\models\DafBuku;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -40,56 +41,15 @@ class DafBukuController extends Controller
       */
     public function actionIndex()
     {
-        $dafKategori = DafKategoriBuku::find()->all();
-        $dafKategori = ArrayHelper::map($dafKategori,'id','nama');
-
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 6
-        $search = Yii::$app->request->queryParams; 
-
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 7 joint mencari nama katbuku
-        $query = DafBuku::find()->joinWith('kategori'); 
-
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 9
-        if(!empty($search['kategori_id'])){ 
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 8
-            $query->andFilterWhere(['Like','daf_kategori_buku.nama',$search['kategori_id']]);
-        }
-
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
-        if(!empty($search['judul'])){ 
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
-            $query->andFilterWhere(['Like','judul',$search['judul']]); 
-        }
-
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
-        if(!empty($search['pengarang'])){ 
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
-            $query->andFilterWhere(['Like','pengarang',$search['pengarang']]); 
-        }
-
-        //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 3
-        if(!empty($search['tahun_terbit'])){ 
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview part 2 step 4
-            $query->andFilterWhere(['Like','tahun_terbit',$search['tahun_terbit']]); 
-        }
-
-        $dataProvider = new ActiveDataProvider([
-            //Membuat Filtering Model dengan Dropdownlist & TextInput pada Gridview 5
-            'query' => $query, 
-        ]);
+        $searchModel = new DafBukuSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'dafKategori' => $dafKategori
+            'searchModel' => $searchModel
         ]);
     }
 
-    /**
-     * Displays a single DafBuku model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -134,9 +94,7 @@ class DafBukuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        //dropdown list 9
         $dafKategori = DafKategoriBuku::find()->all(); 
-        //dropdown list 10  parameter object 1 dari katbuku , parameter 2 (key), parameter 3 value
         $dafKategori = ArrayHelper::map($dafKategori,'id','nama'); 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -145,8 +103,6 @@ class DafBukuController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-
-            //dropdown list 11 kirim array dari katbuku ke form yg dropdownlist
             'dafKategori' => $dafKategori 
         ]);
     }
