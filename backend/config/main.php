@@ -13,6 +13,10 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+        'mongodb' => [
+            'class' => '\yii\mongodb\Connection',
+            'dsn' => 'mongodb://developer:password@localhost:27017/mydatabase',
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
