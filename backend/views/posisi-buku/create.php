@@ -1,9 +1,15 @@
 <?php
 
 use yii\helpers\Html;
+use backend\models\DafBuku;
+use backend\models\RakBuku;
+use yii\helpers\ArrayHelper; 
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\PosisiBuku */
+$dafBuku = DafBuku::find()->all(); 
+$rakBuku = RakBuku::find()->all(); 
+$dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul');
+$rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); 
+
 
 $this->title = 'Create Posisi Buku';
 $this->params['breadcrumbs'][] = ['label' => 'Posisi Buku', 'url' => ['index']];
@@ -15,9 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        //dropdown list 6
         'dafBuku' => $dafBuku, 
-        //dropdown list 6
         'rakBuku' => $rakBuku 
     ]) ?>
 

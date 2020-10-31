@@ -11,8 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="daf-buku-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    // dropdown list 7
+    
     <?= $form->field($model, 'kategori_id')->dropDownList($dafKategori,['prompt'=>'-pilih kategori-'])->label('Nama kategori') ?> 
 
     <?= $form->field($model, 'judul')->textInput(['maxlength' => true]) ?>
