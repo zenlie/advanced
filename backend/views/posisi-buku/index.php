@@ -6,16 +6,11 @@ use backend\models\DafBuku;
 use backend\models\RakBuku;
 use yii\helpers\ArrayHelper;
 
-/* model for dropdown */
 $rakBuku = RakBuku::find()->all(); 
 $rakBuku = ArrayHelper::map($rakBuku,'id','no_rak'); 
-
 $dafBuku = DafBuku::find()->all(); 
 $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul');
-// echo "<pre>";
-// var_dump($dafBuku); die;
 
-/* start view index */
 $this->title = 'Posisi Buku';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
