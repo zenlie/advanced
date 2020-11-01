@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use backend\models\DafKategoriBuku;
+use yii\helpers\ArrayHelper; 
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\DafBuku */
+$dafKategoriBuku = DafKategoriBuku::find()->all();
+$dafKategoriBuku = ArrayHelper::map($dafKategoriBuku,'id','nama');
 
 $this->title = 'Create Buku';
 $this->params['breadcrumbs'][] = ['label' => 'Buku', 'url' => ['index']];
@@ -15,8 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        //dropdown list 6
-        'dafKategori' => $dafKategori 
+        'dafKategoriBuku' => $dafKategoriBuku 
     ]) ?>
 
 </div>

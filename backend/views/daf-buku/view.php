@@ -3,9 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\DafBuku */
-
 $this->title = $model->buku_id;
 $this->params['breadcrumbs'][] = ['label' => 'Buku', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'buku_id',
-            //dropdown list 8
             'kategori.nama', 
             'judul',
             'pengarang',

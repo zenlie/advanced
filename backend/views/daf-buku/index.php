@@ -5,9 +5,8 @@ use yii\grid\GridView;
 use backend\models\DafKategoriBuku;
 use yii\helpers\ArrayHelper;
 
-/* model for dropdown */
-$dafKategori = DafKategoriBuku::find()->all();
-$dafKategori = ArrayHelper::map($dafKategori,'id','nama');
+$dafKategoriBuku = DafKategoriBuku::find()->all();
+$dafKategoriBuku = ArrayHelper::map($dafKategoriBuku,'id','nama');
 
 $this->title = 'Buku';
 $this->params['breadcrumbs'][] = $this->title;
@@ -26,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'kategori_id', 
                 'value' => 'kategori.nama', 
-                'filter' => Html::ActivedropDownList($searchModel, 'kategori_id', $dafKategori,
+                'filter' => Html::ActivedropDownList($searchModel, 'kategori_id', $dafKategoriBuku,
                     ['class'=>'form-control','prompt'=>'- pilih kategori -']
                 )        
             ],

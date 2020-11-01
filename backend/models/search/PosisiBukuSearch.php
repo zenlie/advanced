@@ -22,7 +22,7 @@ class PosisiBukuSearch extends PosisiBuku
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 5
+                'pageSize' => 10
             ]
         ]);
 

@@ -22,7 +22,7 @@ class DafBukuSearch extends DafBuku
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 3
+                'pageSize' => 10
             ]
         ]);
 

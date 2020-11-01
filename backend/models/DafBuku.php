@@ -17,8 +17,7 @@ class DafBuku extends \yii\db\ActiveRecord
             [['kategori_id', 'judul', 'pengarang', 'tahun_terbit'], 'required'],
             [['kategori_id'], 'integer'],
             [['tahun_terbit'], 'safe'],
-            [['judul', 'pengarang'], 'string', 'max' => 100],
-            [['kategori_id'], 'exist', 'skipOnError' => true, 'targetClass' => DafKategoriBuku::className(), 'targetAttribute' => ['kategori_id' => 'id']],
+            [['judul', 'pengarang'], 'string', 'max' => 100]
         ];
     }
 

@@ -3,9 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\PosisiBuku */
-
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Posisi Buku', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -32,8 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'buku.judul',
             'rak.no_rak',
-            // 'rak_id',
-            // 'buku_id',
         ],
     ]) ?>
 
