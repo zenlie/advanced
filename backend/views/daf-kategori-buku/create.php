@@ -2,9 +2,6 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\DafKategoriBuku */
-
 $this->title = 'Create Kategori Buku';
 $this->params['breadcrumbs'][] = ['label' => 'Kategori Buku', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

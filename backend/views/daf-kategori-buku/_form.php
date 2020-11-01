@@ -2,10 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model backend\models\DafKategoriBuku */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="daf-kategori-buku-form">

@@ -3,22 +3,20 @@
 namespace backend\models\search;
 
 use yii\data\ActiveDataProvider;
-use backend\models\DafBuku;
+use backend\models\DafKategoriBuku;
 
-class DafKategoriBukuSearch extends DafBuku
+class DafKategoriBukuSearch extends DafKategoriBuku
 {
     public function rules()
     {
         return [
-            [['kategori_id', 'judul', 'pengarang', 'tahun_terbit'], 'safe'],
+            [['nama'], 'safe'],
         ];
     }
 
     public function search($params)
     {
-        $query = DafBuku::find();
-        $query->joinWith(['kategori']);    
-
+        $query = DafKategoriBuku::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -27,15 +25,11 @@ class DafKategoriBukuSearch extends DafBuku
         ]);
 
         $this->load($params);
-        // var_dump( $this->judul); die;
+        // var_dump( $this->nama); die;
         if (! $this->validate()) {
             return $dataProvider;
         }
-        $query->andFilterWhere(['like', 'kategori_id', $this->kategori_id]);
-        $query->andFilterWhere(['like', 'judul', $this->judul]);
-        $query->andFilterWhere(['like', 'pengarang', $this->pengarang]);
-        $query->andFilterWhere(['like', 'tahun_terbit', $this->tahun_terbit]);
-
+        $query->andFilterWhere(['like', 'nama', $this->nama]);
         return $dataProvider;
     }    
 }
