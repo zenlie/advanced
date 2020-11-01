@@ -10,14 +10,13 @@ class HargaBukuSearch extends HargaBuku
     public function rules()
     {
         return [
-            [['kategori_id', 'judul', 'pengarang', 'tahun_terbit'], 'safe'],
+            [['buku_id', 'harga'], 'safe'],
         ];
     }
 
     public function search($params)
     {
-        $query = DafBuku::find();
-        $query->joinWith(['kategori']);    
+        $query = HargaBuku::find();  
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -31,10 +30,8 @@ class HargaBukuSearch extends HargaBuku
         if (! $this->validate()) {
             return $dataProvider;
         }
-        $query->andFilterWhere(['like', 'kategori_id', $this->kategori_id]);
-        $query->andFilterWhere(['like', 'judul', $this->judul]);
-        $query->andFilterWhere(['like', 'pengarang', $this->pengarang]);
-        $query->andFilterWhere(['like', 'tahun_terbit', $this->tahun_terbit]);
+        $query->andFilterWhere(['like', 'buku_id', $this->buku_id]);
+        $query->andFilterWhere(['like', 'harga', $this->harga]);
 
         return $dataProvider;
     }    

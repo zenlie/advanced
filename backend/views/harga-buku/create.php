@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use backend\models\DafBuku;
+use yii\helpers\ArrayHelper; 
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\HargaBuku */
+$dafBuku = DafBuku::find()->all();
+$dafBuku = ArrayHelper::map($dafBuku,'buku_id','harga');
 
 $this->title = 'Create Harga Buku';
 $this->params['breadcrumbs'][] = ['label' => 'Harga Buku', 'url' => ['index']];
