@@ -32,28 +32,21 @@ class HargaBukuController extends Controller
 
     public function actionCreate()
     {
-        $model = new HargaBuku();
-        $dafBuku = DafBuku::find()->all(); 
-        $dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul'); 
-        
+        $model = new HargaBuku();  
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
-                'dafBuku' => $dafBuku 
+                'model' => $model
             ]);
         }
     }
-
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -62,7 +55,6 @@ class HargaBukuController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
@@ -71,7 +63,6 @@ class HargaBukuController extends Controller
         if (($model = HargaBuku::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

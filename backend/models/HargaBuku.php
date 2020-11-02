@@ -4,28 +4,13 @@ namespace backend\models;
 
 use Yii;
 
-/**
- * This is the model class for table "harga_buku".
- *
- * @property int $id
- * @property int $buku_id
- * @property string $harga
- *
- * @property DafBuku $buku
- */
 class HargaBuku extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'harga_buku';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -36,9 +21,6 @@ class HargaBuku extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -48,11 +30,6 @@ class HargaBuku extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * Gets query for [[Buku]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getBuku()
     {
         return $this->hasOne(DafBuku::className(), ['buku_id' => 'buku_id']);

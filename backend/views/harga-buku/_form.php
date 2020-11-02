@@ -2,10 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model backend\models\HargaBuku */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="harga-buku-form">

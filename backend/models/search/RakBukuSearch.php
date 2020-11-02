@@ -3,22 +3,20 @@
 namespace backend\models\search;
 
 use yii\data\ActiveDataProvider;
-use backend\models\HargaBuku;
+use backend\models\RakBuku;
 
-class HargaBukuSearch extends HargaBuku
+class RakBukuSearch extends RakBuku
 {
     public function rules()
     {
         return [
-            [['buku_id', 'harga'], 'safe'],
+            [['no_rak'], 'safe'],
         ];
     }
 
     public function search($params)
     {
-        $query = HargaBuku::find();  
-        $query->joinWith(['buku']);    
-
+        $query = RakBuku::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -31,9 +29,7 @@ class HargaBukuSearch extends HargaBuku
         if (! $this->validate()) {
             return $dataProvider;
         }
-        $query->andFilterWhere(['like', 'buku_id', $this->buku_id]);
-        $query->andFilterWhere(['like', 'harga', $this->harga]);
-
+        $query->andFilterWhere(['like', 'no_rak', $this->no_rak]);   
         return $dataProvider;
     }    
 }

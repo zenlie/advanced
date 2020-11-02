@@ -2,42 +2,44 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use backend\models\DafBuku;
+use yii\helpers\ArrayHelper;
 
-/* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+$dafBuku = DafBuku::find()->all();
+$dafBuku = ArrayHelper::map($dafBuku,'buku_id','judul');
 
 $this->title = 'Harga Buku';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="harga-buku-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Create Harga Buku', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => true, 
+        'filterModel' => $searchModel, 
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             
-            [
-                'attribute' => 'buku_id',
-                'value' => 'buku.judul', 
-                'filter' => Html::textInput('buku_id',Yii::$app->request->get('buku_id'),['class'=>'form-control']) 
+            // [
+            //     'attribute' => 'buku_id',
+            //     'value' => 'buku.judul', 
+            //     'filter' => Html::textInput($searchModel, 'buku_id', $dafBuku,
+            //         ['class'=>'form-control']) 
                     
+            // ],
+            [
+                'attribute' => 'buku_id', 
+                'value' => 'buku.judul', 
+                'filter' => Html::ActivedropDownList($searchModel, 'buku_id', $dafBuku,
+                    ['class'=>'form-control','prompt'=>'- pilih buku -']
+                )        
             ],
             [
                 'attribute' => 'harga', 
-                'filter' => Html::textInput('harga',Yii::$app->request->get('harga'),['class'=>'form-control']),               
             ],
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
-
 </div>

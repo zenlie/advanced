@@ -2,10 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model backend\models\RakBuku */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="rak-buku-form">
